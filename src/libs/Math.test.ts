@@ -4,6 +4,23 @@ import { describe } from 'node:test';
 import { Math } from './Math';
 
 describe('Testes para a biblioteca Math', () => {
+
+    beforeEach(() => {
+
+    })
+
+    afterEach(() => {
+
+    })
+
+    beforeAll(() => {
+
+    })
+
+    afterAll(() => {
+        
+    })
+
     it('retorna a soma de dois números', () => {
         expect(Math.sum(1, 2)).toBe(3);
     })

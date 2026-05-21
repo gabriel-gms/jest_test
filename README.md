@@ -1,6 +1,6 @@
 # Jest Test - Prática em TDD
 
-Repositório dedicado à **prática de testes unitários e conceitos de Test-Driven Development (TDD)** usando Jest e TypeScript.
+Repositório retirado do curso da b7web, dedicado à **prática de testes unitários e conceitos de Test-Driven Development (TDD)** usando Jest e TypeScript.
 
 ## Objetivo
 
@@ -15,6 +15,7 @@ Consolidar boas práticas em testes, garantir qualidade de código e aprender a 
 - **Jest** - Framework de testes
 - **TypeScript** - Tipagem estática
 - **Node.js** - Runtime
+- **Sequelize** - ORM para banco de dados
 
 ## Como usar
 

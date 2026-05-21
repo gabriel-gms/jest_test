@@ -1,23 +1,20 @@
 import { Request, Response } from 'express';
-import { User } from '../models/User';
-
-export const ping = (req: Request, res: Response) => {
-    res.json({pong: true});
-}
+import { createUser, findByEmail, matchPassword, listAll } from '../services/userService';
 
 export const register = async (req: Request, res: Response) => {
+    console.log(req.body.email, req.body.password);
     if(req.body.email && req.body.password) {
         let { email, password } = req.body;
 
-        let hasUser = await User.findOne({where: { email }});
-        if(!hasUser) {
-            let newUser = await User.create({ email, password });
+        let newUser = await createUser(email, password);
 
-            res.status(201);
-            res.json({ id: newUser.id });
-        } else {
-            res.json({ error: 'E-mail já existe.' });
+        if(newUser) {
+            res.json({
+                id: newUser.id,
+            })
+            return
         }
+        return res.json('E-mail já cadastrado.');
     }
 
     res.json({ error: 'E-mail e/ou senha não enviados.' });
@@ -28,21 +25,24 @@ export const login = async (req: Request, res: Response) => {
         let email: string = req.body.email;
         let password: string = req.body.password;
 
-        let user = await User.findOne({ 
-            where: { email, password }
-        });
+        let user = await findByEmail(email);
 
-        if(user) {
-            res.json({ status: true });
+        if(user && await matchPassword(password, user.password)) {
+                res.json({ status: true });
+                return;
+            }
+        }
+        else {
+            res.status(400).json({ error: 'E-mail ou senha errados.' });
             return;
         }
-    }
-
-    res.json({ status: false });
+    
+    res.json({ error: 'E-mail e/ou senha não enviados.' });
 }
 
+
 export const list = async (req: Request, res: Response) => {
-    let users = await User.findAll();
+    let users = await listAll();
     let list: string[] = [];
 
     for(let i in users) {
