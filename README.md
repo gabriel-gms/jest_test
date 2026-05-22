@@ -9,6 +9,7 @@ Consolidar boas práticas em testes, garantir qualidade de código e aprender a 
 ## Observações
 
 - pasta **lib/** - Possui funções utilitárias com testes unitários.
+- pasta **services/** - Possui os testes da api com manipulação no banco de dados
 
 ## Tecnologias
 
